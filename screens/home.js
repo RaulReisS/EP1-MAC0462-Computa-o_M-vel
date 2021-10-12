@@ -16,6 +16,10 @@ export default function ({ navigation, route }) {
           <Text style={globalStyles.buttonText}>Clima</Text>
         </TouchableOpacity>
 
+        <TouchableOpacity style={globalStyles.button} onPress={() => navigation.navigate('Recipe')}>
+          <Text style={globalStyles.buttonText}>Recipe</Text>
+        </TouchableOpacity>
+
 
         <Button
           title="Go to Details... again"
