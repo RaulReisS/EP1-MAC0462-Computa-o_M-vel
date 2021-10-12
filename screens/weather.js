@@ -5,7 +5,7 @@ import { globalStyles } from '../styles/global'
 import { colors } from '../styles/colors'
 import * as Location from 'expo-location'
 import WeatherInfo from '../components/WeatherInfo'
-import { AsyncStorage } from 'react-native';
+import  AsyncStorage  from '@react-native-async-storage/async-storage';
 import { WEATHER_API_KEY } from '@env' 
 
 const BASE_WEATHER_URL = "https://api.openweathermap.org/data/2.5/weather?"
@@ -15,7 +15,6 @@ const unitsSystem = "metric"
 export default function ({ navigation, route }) {
     const [errorMessage, setErrorMessage] = useState(null)
     const [currentWeather, setCurrentWeather] = useState(null)
-    const [test, setTest] = useState('Clima: ')
     const [hist, setHist] = useState([])
 
     useEffect(() => {
@@ -28,11 +27,15 @@ export default function ({ navigation, route }) {
 
         try {
             const recebido = await AsyncStorage.getItem('historia')
+
+            let storageData = [];
             if (recebido !== null) {
-                const traduzido = JSON.parse(recebido)
-                setHist(traduzido)
+                storageData = JSON.parse(recebido)
             }
-            let { status } = await Location.requestPermissionsAsync()
+
+            setHist(storageData);
+
+            let { status } = await Location.requestForegroundPermissionsAsync()
 
             if (status != 'granted') {
                 setErrorMessage('É necessário acessar o local do dispositivo para esta funcionalidade')
@@ -62,23 +65,19 @@ export default function ({ navigation, route }) {
                 const hora = date.getHours()
                 const min = date.getUTCMinutes()
 
-                setHist((prev) => {
-                    const lista = prev;
-                    const novoItem = {
-                        tempo: `${temp} °C`,
-                        nome: `${description}`,
-                        local: `${name}`,
-                        data: `${dia}/${mes}/${ano} ${hora}:${min}`,
-                        key: `${lista.length}`
-                    }
-                    lista.push(novoItem)
-                    alert(lista.length)
-                    return lista
-                })
+                storageData.push({
+                    tempo: `${temp} °C`,
+                    nome: `${description}`,
+                    local: `${name}`,
+                    data: `${dia}/${mes}/${ano} ${hora}:${min}`,
+                    key: `${storageData.length}`
+                });
+
+                setHist(storageData)
 
                 setCurrentWeather(result)
 
-                await AsyncStorage.setItem('historia', JSON.stringify(hist))
+                await AsyncStorage.setItem('historia', JSON.stringify(storageData))
             }
             else {
                 setErrorMessage(error.message)
@@ -118,7 +117,7 @@ export default function ({ navigation, route }) {
     }
     else if (errorMessage) {
         return (
-            <View style={styles.container}>
+            <View style={globalStyles.container}>
                 <StatusBar style="auto" />
                 <View>
                     <Text style={{textAlign: 'center'}}>{errorMessage}</Text>
