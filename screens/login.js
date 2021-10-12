@@ -3,7 +3,7 @@ import * as WebBrowser from 'expo-web-browser';
 import { Button, View, Text } from 'react-native';
 import * as Google from 'expo-auth-session/providers/google';
 import axios from 'axios';
-import { EXPO_CLIENT_ID, WEB_CLIENT_ID } from '@env'
+import { EXPO_CLIENT_ID, WEB_CLIENT_ID, ANDROID_CLIENT_ID } from '@env'
 
 export default function ({ navigation }) {
 
@@ -12,14 +12,18 @@ export default function ({ navigation }) {
     const [_, response, promptAsync] = Google.useAuthRequest({
         expoClientId: EXPO_CLIENT_ID,
         webClientId: WEB_CLIENT_ID,
+        androidClientId: ANDROID_CLIENT_ID
     });
       
     React.useEffect(() => {
         console.log("effect response", response)
+        alert(response?.type);
         if (response?.type === 'success') {
             const { authentication } = response;
             
             console.log("authentication", authentication);
+
+            alert(authentication);
 
             axios.get('https://www.googleapis.com/oauth2/v2/userinfo',
                 {
@@ -29,6 +33,7 @@ export default function ({ navigation }) {
                 }
             )
             .then((axiosResponse) => {
+                alert("axios responseee!");
                 navigation.navigate("Home", {
                     user: axiosResponse.data
                 })
