@@ -8,9 +8,6 @@ import WeatherInfo from '../components/WeatherInfo'
 import { AsyncStorage } from 'react-native';
 import { WEATHER_API_KEY } from '@env' 
 
-
-const WEATHER_API_KEY = "e3226d5a710ed7b606cbe4443abb8c31"
-
 const BASE_WEATHER_URL = "https://api.openweathermap.org/data/2.5/weather?"
 
 const unitsSystem = "metric"
