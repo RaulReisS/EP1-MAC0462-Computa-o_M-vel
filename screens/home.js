@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { Button, View, Text, Image } from 'react-native';
+import { Button, View, Text, Image, TouchableOpacity } from 'react-native';
+import { globalStyles } from '../styles/global'
 
 export default function ({ navigation, route }) {
     console.log("aaa", route.params?.user);
@@ -10,10 +11,16 @@ export default function ({ navigation, route }) {
         <Image
             style={{width: 50, height: 50}}
             source={{uri: route.params?.user?.picture}}/>
+
+        <TouchableOpacity style={globalStyles.button} onPress={() => navigation.navigate('Clima')}>
+          <Text style={globalStyles.buttonText}>Clima</Text>
+        </TouchableOpacity>
+
+
         <Button
           title="Go to Details... again"
           onPress={() => navigation.navigate('Details')}
         />
       </View>
     );
-  }
+}

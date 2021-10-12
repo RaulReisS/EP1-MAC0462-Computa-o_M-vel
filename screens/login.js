@@ -3,7 +3,6 @@ import * as WebBrowser from 'expo-web-browser';
 import { Button, View, Text } from 'react-native';
 import * as Google from 'expo-auth-session/providers/google';
 import axios from 'axios';
-
 import { EXPO_CLIENT_ID, WEB_CLIENT_ID } from '@env'
 
 export default function ({ navigation }) {
