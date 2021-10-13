@@ -15,14 +15,18 @@ export default function ({ navigation }) {
     const [_, response, promptAsync] = Google.useAuthRequest({
         expoClientId: EXPO_CLIENT_ID,
         webClientId: WEB_CLIENT_ID,
+        androidClientId: ANDROID_CLIENT_ID
     });
       
     React.useEffect(() => {
         console.log("effect response", response)
+        alert(response?.type);
         if (response?.type === 'success') {
             const { authentication } = response;
             
             console.log("authentication", authentication);
+
+            alert(authentication);
 
             axios.get('https://www.googleapis.com/oauth2/v2/userinfo',
                 {
@@ -32,6 +36,7 @@ export default function ({ navigation }) {
                 }
             )
             .then((axiosResponse) => {
+                alert("axios responseee!");
                 navigation.navigate("Home", {
                     user: axiosResponse.data
                 })
