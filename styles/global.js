@@ -12,19 +12,43 @@ export const globalStyles = StyleSheet.create({
         padding: 16,
         backgroundColor: colors.PRIMARY_COLOR,
         borderRadius: 20,
-        margin: 16
+        margin: 16,
+        paddingHorizontal: 64,
+        flexDirection: 'row'
     },
     buttonText: {
-        color: colors.TEXTWHITE_COLOR
+        color: colors.TEXTWHITE_COLOR,
+        fontSize: 18
+    },
+    listBox: {
+        marginHorizontal: 16,
+        paddingEnd: 16,
+        flex: 1,
+        width: '100%'
+    },
+    histItem: {
+       fontSize: 16,
+       flex: 1,
+    },
+    listLine: {
+        backgroundColor: colors.SECONDARY_COLOR,
+        justifyContent: 'space-between',
+        flexDirection: 'row',
+        marginBottom: 14,
+        borderWidth: 1,
+        borderRadius: 20,
+        padding: 8,
+        marginEnd: 16
     },
     secondaryText: {
         color: colors.TEXTBLACK_COLOR,
         marginBottom: 8,
-        marginHorizontal: 16,
-        fontSize: 16
+        marginHorizontal: 18,
+        fontSize: 16,
+        fontWeight: 'bold',
     },
     historyBox: {
-        backgroundColor: 'blue',
+        //backgroundColor: 'blue',
         flexDirection: 'row'
     },
     imageFront: {
@@ -129,5 +153,21 @@ export const globalStyles = StyleSheet.create({
     ingredientQt: {
         fontSize: 14,
         color: colors.TEXTGRAY_COLOR
+    },
+    personImage: {
+        width: 60,
+        height: 60,
+        borderRadius: 30
+    },
+    personName: {
+        fontSize: 16
+    },
+    personInfo: {
+        flexDirection: 'row',
+        width: '100%',
+        height: 60,
+        paddingHorizontal: 16,
+        justifyContent: 'space-between',
+        marginBottom: 100
     }
 })

@@ -1,8 +1,11 @@
 import * as React from 'react';
 import * as WebBrowser from 'expo-web-browser';
-import { Button, View, Text } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import * as Google from 'expo-auth-session/providers/google';
 import axios from 'axios';
+import { globalStyles } from '../styles/global';
+import { AntDesign } from '@expo/vector-icons';
+import { colors } from '../styles/colors';
 import { EXPO_CLIENT_ID, WEB_CLIENT_ID } from '@env'
 
 export default function ({ navigation }) {
@@ -39,16 +42,20 @@ export default function ({ navigation }) {
         }
     }, [response]);
 
+    const log = () => {
+        console.log("starting google+ login")
+        promptAsync();
+    }
+
     return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <Text>Login Screen</Text>
-            <Button 
-                title="Google+" 
-                onPress={() => {
-                    console.log("starting google+ login")
-                    promptAsync();
-                }} 
-            />
+            <Text style={{marginBottom: 32, fontSize: 18}}>Faça login com Google</Text>
+
+
+            <TouchableOpacity style={globalStyles.button} onPress={log}>
+            <AntDesign style={{marginEnd: 16}} name="google" size={24} color={colors.TEXTWHITE_COLOR} />
+                <Text style={globalStyles.buttonText}>Google+</Text>  
+            </TouchableOpacity>
         </View>
     );
 }

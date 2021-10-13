@@ -60,7 +60,7 @@ const ingredient = [
 ]
 
 export default function ({ navigation, route }) {
-    const [qt, setQt] = useState(2)
+    const [qt, setQt] = useState(4)
 
     const add = () => {
         setQt((prev) => {

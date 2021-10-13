@@ -94,24 +94,23 @@ export default function ({ navigation, route }) {
             <View style={ globalStyles.container }>
                 <StatusBar style="auto" />
                 <WeatherInfo currentWeather={currentWeather}/>
-                <TouchableOpacity onPress={loadWeather}>
                     <View style={globalStyles.historyBox}>
                         <Text style={globalStyles.secondaryText}>Histórico</Text>
                     </View>
-                </TouchableOpacity>
+                <View style={globalStyles.listBox}>
                 <FlatList 
                 numColumns={1}
                 data={hist}
                 renderItem={({ item}) => (
-                    <View>
-                        <Text>{item.tempo}</Text>
-                        <Text>{item.desc}</Text>
-                        <Text>{item.local}</Text>
-                        <Text>{item.data}</Text>
-                        <Text>{item.key}</Text>
+                    <View style={globalStyles.listLine}>
+                        <Text style={globalStyles.histItem}>{item.tempo}</Text>
+                        <Text style={globalStyles.histItem}>{item.desc}</Text>
+                        <Text style={globalStyles.histItem}>{item.local}</Text>
+                        <Text style={{...globalStyles.histItem, flex: 2}}>{item.data}</Text>
                     </View>
                 )}
                 />
+                </View>
             </View>
         )
     }
