@@ -6,7 +6,7 @@ import axios from 'axios';
 import { globalStyles } from '../styles/global';
 import { AntDesign } from '@expo/vector-icons';
 import { colors } from '../styles/colors';
-import { EXPO_CLIENT_ID, WEB_CLIENT_ID } from '@env'
+import { EXPO_CLIENT_ID, WEB_CLIENT_ID, ANDROID_CLIENT_ID } from '@env'
 
 export default function ({ navigation }) {
 
@@ -19,14 +19,11 @@ export default function ({ navigation }) {
     });
       
     React.useEffect(() => {
-        console.log("effect response", response)
-        alert(response?.type);
+        console.log("effect response", response);
         if (response?.type === 'success') {
             const { authentication } = response;
             
             console.log("authentication", authentication);
-
-            alert(authentication);
 
             axios.get('https://www.googleapis.com/oauth2/v2/userinfo',
                 {
@@ -36,7 +33,6 @@ export default function ({ navigation }) {
                 }
             )
             .then((axiosResponse) => {
-                alert("axios responseee!");
                 navigation.navigate("Home", {
                     user: axiosResponse.data
                 })

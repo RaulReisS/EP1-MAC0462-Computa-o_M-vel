@@ -9,7 +9,7 @@ export default function ({ navigation, route }) {
         <View style={globalStyles.personInfo}>
         <Text>{route.params?.user?.name}{`\n`}({route.params?.user?.email})</Text>
           <Image style={globalStyles.personImage}
-          source={{uri: "https://images.pexels.com/photos/1520760/pexels-photo-1520760.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"}}/>
+          source={{uri: route.params?.user?.picture}}/>
         </View>
 
         <Text style={{fontSize: 18, fontWeight: 'bold', marginBottom: 32}}>Funcionalidades</Text>
